@@ -1,40 +1,33 @@
-import 'react-native-gesture-handler';
-import React  from 'react';
-import {ScrollView, View} from 'react-native';
-import styled from 'styled-components/native';
+import React from 'react';
+import Styled from 'styled-components/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
-//import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import LoginBtn from '../Components/LoginBtn';
 
-const container = styled.View`
-        flex: 1;
-        padding: wp('5%');
-        backgroundColor: 'white';`
+const Container = Styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
 
-const wrapContent= styled.View`
-        width: wp('90%');
-        height: wp('90%');
-        paddingBottom: wp('5%');`
-        
+const Label = Styled.Text``;
 
-const content = styled.View`
-        width: "100%";
-        height: "100%";
-        backgroundColor: "#46c3ad";`
+type NavigationProp = StackNavigationProp<HomeScreenStackNaviParamList, 'Modal'>;
 
-const HomeScreen = () =>  {
-
-        return (
-        
-        <ScrollView>
-
-        </ScrollView>
-        
-        
-        );
+interface Props {
+  navigation: NavigationProp;
 }
-
-
-//const styles = StyleSheet.create({
-        
+const HomeScreen = ({navigation}: Props) => {
+  return (
+    <Container>
+      <Label>This is First Tab</Label>
+      <LoginBtn label="Open Modal" onPress={() => navigation.navigate('Modal')} />
+      <LoginBtn
+        label="Open Full Modal"
+        onPress={() => navigation.navigate('FullModal')}
+      />
+    </Container>
+  );
+};
 
 export default HomeScreen;

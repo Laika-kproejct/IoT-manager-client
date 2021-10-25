@@ -9,12 +9,12 @@ const Container = Styled.View`
 
 const Label = Styled.Text``;
 
-const SomethingScreen = () => {
+const SecondScreen = () => {
   return (
     <Container>
-      <Label>This is Third Tab</Label>
+      <Label>This is Second Tab</Label>
     </Container>
   );
 };
 
-export default SomethingScreen;
+export default SecondScreen;
