@@ -18,7 +18,6 @@ import theme from '../Styles/theme';
 import LoginBtn from '../Components/LoginBtn';
 import SignUpBtn from '../Components/SignUpBtn';
 import Icon from 'react-native-vector-icons/Ionicons';
-
 import axios from 'axios';
 
 interface EmailBoxProps{
@@ -164,16 +163,18 @@ const LoginScreen = () => {
 }
 const styles = StyleSheet.create({
 
-    button: {
-      flex: 1,
-      backgroundColor: "#5279DD",
-      justifyContent: "center",
-      alignItems: "center",
-      marginBottom: 10,
-      borderRadius: 10,
+button: {
+    flex: 1,
+    backgroundColor: "#5279DD",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 10,
+    borderRadius: 10,
     },
+    
     text: {
-      color: "#fff"
+    color: "#fff"
     }
-  });
+});
+
 export default LoginScreen;
