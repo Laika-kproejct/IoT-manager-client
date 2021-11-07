@@ -9,12 +9,12 @@ const Container = Styled.View`
 
 const Label = Styled.Text``;
 
-const SettingScreen = () => {
-  return (
+const LoadingScreen = () => {
+return (
     <Container>
-      <Label>This is Fourth Tb</Label>
+    <Label>This is Loading Tab</Label>
     </Container>
-  );
+);
 };
 
-export default SettingScreen;
+export default LoadingScreen;

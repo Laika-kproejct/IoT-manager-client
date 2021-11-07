@@ -12,7 +12,7 @@ const Label = Styled.Text``;
 const SecondScreen = () => {
   return (
     <Container>
-      <Label>This is Second Tab</Label>
+      <Label>This is Secod Tab</Label>
     </Container>
   );
 };

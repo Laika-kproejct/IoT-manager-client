@@ -9,12 +9,12 @@ const Container = Styled.View`
 
 const Label = Styled.Text``;
 
-const SettingScreen = () => {
+const Modal = () => {
   return (
     <Container>
-      <Label>This is Fourth Tb</Label>
+      <Label>Modal!</Label>
     </Container>
   );
 };
 
-export default SettingScreen;
+export default Modal;

@@ -1,29 +1,18 @@
 import 'react-native-gesture-handler';
-import React, {useState, useEffect, Component} from 'react';
+import React, {useState} from 'react';
 import {
     View,
     Text,
     TextInput,
     TouchableOpacity,
-    Image,
     ImageBackground,
-    Alert,
-    Button,
     StyleSheet
 } from 'react-native';
-
 import styled from 'styled-components/native';
 import StyledText from '../Components/StyledText';
-import theme from '../Styles/theme';
-import LoginBtn from '../Components/LoginBtn';
 import SignUpBtn from '../Components/SignUpBtn';
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
-
-interface EmailBoxProps{
-    val: string;
-    length: number;
-}
 
 const Container = styled.View`
     flex: 1;
@@ -40,7 +29,7 @@ const Header = styled.View`
 const Title = styled.View`
     width: 100%;
     height: 20%;
-    paddingTop: 35
+    paddingTop: 35px;
     
 `;
 
@@ -49,39 +38,23 @@ const Content = styled.View`
     justify-Content: center;
 `;
 
-/*
-const InputID = styled.TextInput`
-    backgroundColor: ${theme.colors.backgroundMainColor};
-    borderRadius: 30px;
-    width: 70%;
-    height: 35;
-    marginBottom: 10px;
-    alignItems: center;
-`;
-*/
+
 const Footer = styled.View`
     width: 100%;
     height: 20%;
     justify-Content: center;
 `;
-/*
-const BtnClick = styled.TouchableOpacity`
-    width: 90px;
-    borderRadius: 20px;
-    height: 30px;
-    alignItems: center;
-    justify-Content: center;
-    backgroundColor: ${theme.colors.backgroundMainColor};
-`;*/
-const LoginScreen = () => {
+
+const LoginScreen = ({navigation}: {navigation: any}) => {
     //<View style={styled.Container}>
-    const [email, setEmail] = useState("");
+    const [userId, setUserId] = useState('');
     const [userPassword, setUserPassword] = useState('');
 
     const onClickLogin = () => {
         axios.post("http://192.168.0.40:8080/manager/login",{
-            email: email,
+            Id: userId,
             password: userPassword
+            
         }).then((response: any)=> {
             const accessToken = response.data.list.accessToken;
             const refreshToken = response.data.list.refreshToken;
@@ -117,7 +90,7 @@ const LoginScreen = () => {
     return(
         <Container>
             <Header>
-                <ImageBackground 
+            <ImageBackground 
             	style={{ width: "50%", height: "70%" }}  //View를 꽉채우도록
                 source={require("../images/logo.png")}  //이미지경로
                 resizeMode="cover" // 'cover', 'contain', 'stretch', 'repeat', 'center' 중 선택 
@@ -133,7 +106,7 @@ const LoginScreen = () => {
                     paddingBottom:30}}>
                     <Text style={{fontSize:15}}><Icon ion-icon name="people-outline" size={40} color="black" /></Text>
                         <TextInput 
-                        onChangeText={(email) => setEmail(email)}
+                        onChangeText={(Id) => setUserId(Id)}
                         placeholder={'아이디'}
                         
                         style={{borderColor: 'black', width:'80%', height:55, borderWidth: 1, borderRadius: 35}}/>
@@ -147,34 +120,44 @@ const LoginScreen = () => {
                         style={{borderColor: 'black', width:'80%', height:55, borderWidth: 1, borderRadius: 35}}/>
                         </View>
                     </Content>
-
-
                     <Footer>
-                        <TouchableOpacity activeOpacity={0.8} style={styles.button}
-                        onPress = {()=>{onClickLogin()}}>    
-                        <Text style={styles.text}>로그인</Text>
+                        <TouchableOpacity activeOpacity={0.8} style={styles.button1}
+                        onPress = {()=>{onClickLogin(),navigation.navigate('Bottom')}}>    
+                        <Text style={styles.text1}>로그인</Text>
                         </TouchableOpacity>
-                        
-                        
-                        <SignUpBtn/>                        
+                        <TouchableOpacity  activeOpacity={0.8} style={styles.button2} onPress={() => {navigation.navigate('SignUp'); }}>
+                        <Text style={styles.text2}>회원가입</Text>
+                        </TouchableOpacity>                       
                     </Footer>            
         </Container>    
     );
-}
+};
 const styles = StyleSheet.create({
 
-button: {
+button1: {
     flex: 1,
-    backgroundColor: "#5279DD",
+    backgroundColor: "#2058e6",
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
     borderRadius: 10,
     },
-    
-    text: {
+
+    text1: {
     color: "#fff"
-    }
+    },
+button2: {
+        flex: 1,
+        backgroundColor: "#5279DD",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 10,
+        borderRadius: 10,
+        },
+    
+        text2: {
+        color: "#fff"
+        }   
 });
 
 export default LoginScreen;
