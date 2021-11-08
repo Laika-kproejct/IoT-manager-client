@@ -1,45 +1,35 @@
 import 'react-native-gesture-handler';
-import styled from 'styled-components/native';
 import React from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  
-} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import Navi from './src/Navigation/Navi';
-//rimport {createStore, applyMiddleware} from 'redux';
-//import {Provider} from 'react-redux';
-//import ReduxThunk from 'redux-thunk';
-//import { NavigationContainer } from '@react-navigation/native';
-//import Navi from './src/Screen/Navi';
-import HomeScreen from './src/Screen/HomeScreen';
+import axios from 'axios';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createAppContainer } from 'react-navigation';
+import styled from 'styled-components/native';
+import StyledText from './src/Components/StyledText';
 import LoginScreen from './src/Screen/LoginScreen';
-import EmailBox from './src/Components/EmailBox';
-import LoginBtn from './src/Components/LoginBtn';
+import SignUpScreen from './src/Screen/SignUpScreen';
+import SecondScreen from './src/Screen/SecondScreen';
+import HomeScreen from './src/Screen/HomeScreen';
+import MainScreen from './src/Screen/MainScreen';
+import SettingScreen from './src/Screen/SettingScreen';
+import SomethingScreen from './src/Screen/SomethingScreen';
+import MainBottomTab from './src/Navigations/MainBottomTab';
+import InitNavi from './src/Navigations/InitNavi';
 
+const Wrapper = styled.View`
+  width: 100%
+`;
 
 const App = () => {
+  
   return (
-    
+    <Wrapper>
     <NavigationContainer>
-              <Navi/>
-        </NavigationContainer>
-    //<NavigationContainer>
-     // <Navi/>
-    //</NavigationContainer>
-
+      <InitNavi/>
+    </NavigationContainer>
+    </Wrapper>
   );
 }
 
 export default App;
-/*
-const App = () => {
-  return (
-    <AppStack />
-  );
-}
-export default App;
-*/
