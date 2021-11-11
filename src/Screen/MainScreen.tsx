@@ -38,7 +38,7 @@ const MainScreen = ({navigation}:{navigation: any}) => {
     return(
         <Container>
         <Body>
-        <Image source={require("/Laika_ReactNative/src/images/IconB.png")}/>
+        <Image source={require("../images/IconB.png")}/>
         </Body>
         <Footer>
         <Touch onPress={() => {

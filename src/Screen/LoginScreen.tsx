@@ -10,9 +10,9 @@ import {
 } from 'react-native';
 import styled from 'styled-components/native';
 import StyledText from '../Components/StyledText';
-import SignUpBtn from '../Components/SignUpBtn';
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Container = styled.View`
     flex: 1;
@@ -29,7 +29,7 @@ const Header = styled.View`
 const Title = styled.View`
     width: 100%;
     height: 20%;
-    paddingTop: 35px;
+    padding-top: 35px;
     
 `;
 
@@ -42,7 +42,7 @@ const Content = styled.View`
 const Footer = styled.View`
     width: 100%;
     height: 20%;
-    justify-Content: center;
+    justify-content: center;
 `;
 
 const LoginScreen = ({navigation}: {navigation: any}) => {
@@ -52,7 +52,7 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
 
     const onClickLogin = () => {
         axios.post("http://3.36.174.74:8080/manager/login",{
-            Id: userId, 
+            email: userId, 
             password: userPassword
             
         }).then((response: any)=> {
@@ -61,6 +61,10 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
             //토큰을 별도 저장
             //홈화면으로 이동
             console.log(accessToken);
+            console.log(refreshToken);
+            AsyncStorage.setItem('accessToken', accessToken); // 비동기로 처리해도 문제없음
+            AsyncStorage.setItem('refreshToken', refreshToken);
+            console.log("로그인 성공");
 
         }).catch((error: any) => {
             if (error.response) {
@@ -69,7 +73,7 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
                 console.log(error.response.headers);
 
                 if(error.response.status === 400) {
-                console.log('Login Successful. Please Login to proceed');
+                console.log('아이디 혹은 비번이 비었습니다.');
                 }                  
                 if(error.response.status === 404) {
                     console.log("로그인 실패");
