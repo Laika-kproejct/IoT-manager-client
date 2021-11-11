@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Styled from 'styled-components/native';
 import StyledText from '../Components/StyledText';
+import { NavigationContainer } from '@react-navigation/native';
 
 const Container = Styled.View`
   flex: 1;
@@ -49,39 +50,45 @@ const Title = Styled.View`
     font-weight: 600;
 `;
   
-const PlusButton = Styled.TouchableOpacity`
-  width: 50px;
-  height: 50px;
-  background-color: blue;
+const AddButton = Styled.TouchableOpacity`
+  width: 100%;
+  height: 40px;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border: 1px solid gray;
 `;
+
 const Label = Styled.Text`
     font-size: 15px;    
     color: white;
 `;
 
-const HomeScreen = () => { 
-  const [lists, setLists] = useState([]);
-
-  useEffect(() => {
-    axios
-    .get("http://192.168.0.40:8080/manager/list/home")
-    .then(({ data }) => setLists(data))
-    .catch(error => console.log(error))
-    }, []);
-   
+const HomeScreen = ({navigation}: {navigation: any}) => { 
+  const onPressAddButton = () => {
+    navigation.navigate('');
+  }
+  const request = axios.get("http://192.168.0.40:8080/manager/list/home",
+  {params:{pageSize:1, pageNumber:5}
+  })
+  .then(function (response){
+    console.log(response);})
+  .catch(function (error){
+    console.log(error)
+  });
+        
   return (
     <Container>
       <Header>
         <Label>관리대상자</Label>
       </Header>
-      
       <Body>
-        {lists.map((list, index) => (
-           <Post key={index}>
-             <Title>{list.homeId}</Title>
-           <PBody>{list.address}</PBody>
-           </Post>
-        ))}
+        <AddButton onPress={() => {
+            onPressAddButton();
+          }}>
+
+          </AddButton>
       </Body>     
     </Container>
   );
