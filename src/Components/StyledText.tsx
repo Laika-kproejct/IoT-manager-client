@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 interface StyledTextProps {
-    
     size?: string;
     fontWeight?: string;
     color?: string;

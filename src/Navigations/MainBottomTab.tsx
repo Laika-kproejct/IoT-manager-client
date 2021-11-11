@@ -16,20 +16,10 @@ const MainBottom = createMaterialBottomTabNavigator();
 const MainBottomTab = () => {
     
     return(
-        <NavigationContainer>
+        
 
         <MainBottom.Navigator initialRouteName='First'
-        /*
-        screenOptions={({route})=> ({
-            tabBarIcon: props => {
-                let name = '';
-                if (route.name === 'First') name = 'e';
-                else if (route.name === 'Second') name = 'video';
-                else if (route.name === 'Third') name= ''; 
-                return TabIcon({...props, name});
-        },
-        })}
-        */
+        
         >
             <MainBottom.Screen
             name="First"
@@ -42,25 +32,25 @@ const MainBottomTab = () => {
             name="Second"
             component={SecondScreen}
             options={{
-                tabBarLabel: '홈'
+                tabBarLabel: '레시피'
             }} 
             />
             <MainBottom.Screen
             name="Third"
             component={SettingScreen}
             options={{
-                tabBarLabel: '홈'
+                tabBarLabel: '센서'
             }} 
             />
             <MainBottom.Screen
             name="Fourth"
             component={SomethingScreen}
             options={{
-                tabBarLabel: '홈'
+                tabBarLabel: '관리'
             }} 
             />
         </MainBottom.Navigator>
-    </NavigationContainer>
+    
     );
 }       
 

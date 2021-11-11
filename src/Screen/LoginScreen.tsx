@@ -51,8 +51,8 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
     const [userPassword, setUserPassword] = useState('');
 
     const onClickLogin = () => {
-        axios.post("http://192.168.0.40:8080/manager/login",{
-            Id: userId,
+        axios.post("http://3.36.174.74:8080/manager/login",{
+            Id: userId, 
             password: userPassword
             
         }).then((response: any)=> {
@@ -61,14 +61,15 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
             //토큰을 별도 저장
             //홈화면으로 이동
             console.log(accessToken);
+
         }).catch((error: any) => {
             if (error.response) {
-                // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
                 console.log(error.response.data);
                 console.log(error.response.status);
                 console.log(error.response.headers);
+
                 if(error.response.status === 400) {
-                    console.log('Registration Successful. Please Login to proceed');
+                console.log('Login Successful. Please Login to proceed');
                 }                  
                 if(error.response.status === 404) {
                     console.log("로그인 실패");
@@ -102,13 +103,11 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
                 <StyledText fontWeight="700" size="50px" center>로그인</StyledText>
                 </Title>    
                     <Content>
-                    <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',
-                    paddingBottom:30}}>
-                    <Text style={{fontSize:15}}><Icon ion-icon name="people-outline" size={40} color="black" /></Text>
+                    <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center', paddingBottom:30}}>
+                    <Text style={{fontSize:15}}><Icon ion-icon name="people-outline" size={40} color="black"/></Text>
                         <TextInput 
                         onChangeText={(Id) => setUserId(Id)}
                         placeholder={'아이디'}
-                        
                         style={{borderColor: 'black', width:'80%', height:55, borderWidth: 1, borderRadius: 35}}/>
                         </View>
                     <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',paddingBottom:10}}>
@@ -122,9 +121,12 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
                     </Content>
                     <Footer>
                         <TouchableOpacity activeOpacity={0.8} style={styles.button1}
-                        onPress = {()=>{onClickLogin(),navigation.navigate('Bottom')}}>    
+                        
+                        onPress = {()=>{ onClickLogin() }}>
+
                         <Text style={styles.text1}>로그인</Text>
                         </TouchableOpacity>
+
                         <TouchableOpacity  activeOpacity={0.8} style={styles.button2} onPress={() => {navigation.navigate('SignUp'); }}>
                         <Text style={styles.text2}>회원가입</Text>
                         </TouchableOpacity>                       

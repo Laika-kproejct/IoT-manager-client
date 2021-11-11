@@ -45,7 +45,6 @@ const Input = Styled.TextInput`
     padding-right: 0.5rem;
 `;
 
-
 const SignUpScreen = ({navigation}: {navigation: any}) => {
   
   const [userName, setUserName] = useState('');
@@ -55,13 +54,14 @@ const SignUpScreen = ({navigation}: {navigation: any}) => {
   //"http://192.168.0.40:8080/manager/login"
 
   const onClickSignUp = () => {
-  axios.post("http://192.168.0.40:8080/manager/login",{
+  axios.post("http://3.36.174.74:8080/manager/register",{
     Id: userId,
     password: userPassword,
     name: userName
-}).then((response: any)=> {
+}).then((response: any) => {
     const accessToken = response.data.list.accessToken;
     const refreshToken = response.data.list.refreshToken;
+    
     //토큰을 별도 저장
     //홈화면으로 이동
     console.log(accessToken);
@@ -71,9 +71,10 @@ const SignUpScreen = ({navigation}: {navigation: any}) => {
         console.log(error.response.data);
         console.log(error.response.status);
         console.log(error.response.headers);
+
         if(error.response.status === 400) {
-            console.log('Registration Successful. Please Login to proceed');
-        }                  
+          console.log('Registration Successful. Please Login to proceed'); //수정
+        }     
         if(error.response.status === 404) {
             console.log("회원가입 실패");
         }
@@ -132,7 +133,7 @@ const SignUpScreen = ({navigation}: {navigation: any}) => {
         </TextInput>
       </Body>
       <Footer>
-        <TouchableOpacity onPress={() =>{onClickSignUp(),navigation.navigate('Login')}}>
+        <TouchableOpacity onPress={ () =>{ onClickSignUp() }}>
           <StyledText color="white">회원가입</StyledText>
         </TouchableOpacity>
       </Footer>

@@ -20,44 +20,28 @@ const Header = Styled.View`
 `;
 const Body = Styled.View`
   width: 100%;
-  height: 90%;
+  height: 80%;
   background-color: white;
   justify-content: center;
   align-items: center;
 `;
-const Post = Styled.View`
+
+const Footer = Styled.View`
+  width: 100%;
+  height: 10%;
+  background-color: white;
   justify-content: center;
-  border: 2px solid black;
-  border-radius: 10px;
-  background: white;
-  box-shadow: 10px 5px 5px #7f8fa6;
-  width: 80%;
-  height: 20%;
-  margin: 10px;
+  align-items: center;
 `;
 
-const PBody = Styled.View`
-  height: 80%;
-  padding: 11px;
-  border-radius: 20px;
-`;
-const Title = Styled.View`
-    height: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px solid black;
-    font-weight: 600;
-`;
-  
 const AddButton = Styled.TouchableOpacity`
   width: 100%;
   height: 40px;
+  border: 1px solid gray;
   background-color: white;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
-  border: 1px solid gray;
+  border-radius: 10px;
 `;
 
 const Label = Styled.Text`
@@ -67,13 +51,14 @@ const Label = Styled.Text`
 
 const HomeScreen = ({navigation}: {navigation: any}) => { 
   const onPressAddButton = () => {
-    navigation.navigate('');
+    navigation.navigate('Add');
   }
-  const request = axios.get("http://192.168.0.40:8080/manager/list/home",
-  {params:{pageSize:1, pageNumber:5}
+  const request = axios.get("http://3.36.174.74:8080/manager/list/home",
+      {params:{pageSize:1, pageNumber:5}
+      })
+  .then(function (request){
+    console.log(request);
   })
-  .then(function (response){
-    console.log(response);})
   .catch(function (error){
     console.log(error)
   });
@@ -84,12 +69,14 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
         <Label>관리대상자</Label>
       </Header>
       <Body>
-        <AddButton onPress={() => {
+      </Body>
+      <Footer>
+      <AddButton onPress={() => {
             onPressAddButton();
           }}>
-
+            <StyledText>추가</StyledText>
           </AddButton>
-      </Body>     
+      </Footer>    
     </Container>
   );
 };

@@ -8,12 +8,17 @@ import {
     Alert
 
 } from 'react-native';
-import goAlert from "../Modules/goAlert"
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from '@react-navigation/stack';
+import SignUpScreen from '../Screen/SignUpScreen';
 
 
-const SignUpBtn = () => {
+const SignUpBtn = ({navigation}:{navigation: any}) => {
   return (
-    <TouchableOpacity activeOpacity={0.8} style={styles.button} onPress={goAlert}>
+    <TouchableOpacity activeOpacity={0.8} style={styles.button}
+    onPress={() => {
+      navigation.navigate('SignUp');
+  }}>
       <Text style={styles.text}>회원가입</Text>
     </TouchableOpacity>
   );

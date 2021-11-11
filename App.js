@@ -24,11 +24,11 @@ const Wrapper = styled.View`
 const App = () => {
   
   return (
-    <Wrapper>
+    
     <NavigationContainer>
       <InitNavi/>
     </NavigationContainer>
-    </Wrapper>
+    
   );
 }
 

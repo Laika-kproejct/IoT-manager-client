@@ -9,11 +9,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import LoginScreen from '../Screen/LoginScreen';
 import SignUpScreen from '../Screen/SignUpScreen';
 import MainBottomTab from './MainBottomTab';
+import ListAddScreen from '../Screen/ListAddScreen';
 
 const Stack = createStackNavigator();
 
 const InitNavi = () => {
     return(
+    
     <Stack.Navigator initialRouteName="Main">
     <Stack.Screen
     name="Main"
@@ -34,8 +36,14 @@ const InitNavi = () => {
     name="Bottom"
     component={MainBottomTab}
     options={{headerShown:false}}/>
+    
+
+    <Stack.Screen
+    name="Add"
+    component={ListAddScreen}
+    options={{headerShown:false}}/>
     </Stack.Navigator>
-        
+       
     );
 };
 export default InitNavi;
