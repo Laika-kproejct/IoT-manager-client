@@ -12,7 +12,7 @@ const Label = Styled.Text``;
 const Modal = () => {
   return (
     <Container>
-      <Label>Modal!</Label>
+      <Label>Modal Design!</Label>
     </Container>
   );
 };
