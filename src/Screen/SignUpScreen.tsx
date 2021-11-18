@@ -94,10 +94,8 @@ const SignUpScreen = ({navigation}: {navigation: any}) => {
 }
   return (
     <Container>
-
       <Header>
       <ImageBackground
-
       style={{ width: "50%", height: "70%" }}  
       source={require("../images/logo.png")}  
       resizeMode="cover">

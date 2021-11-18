@@ -1,10 +1,7 @@
 import React from 'react';
-import { ImageBackground,
-            Image } from 'react-native';
+import { ImageBackground, Image } from 'react-native';
 import Styled from 'styled-components/native';
 import StyledText from '../Components/StyledText';
-
-
 
 const Container = Styled.View`    
     justify-content: center;

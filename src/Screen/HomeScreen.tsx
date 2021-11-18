@@ -9,7 +9,7 @@ const Container = Styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: lightblue;
+  
 `;
 const Header = Styled.View`
   width: 100%;
@@ -53,7 +53,8 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
   const onPressAddButton = () => {
     navigation.navigate('Add');
   }
-  const request = axios.get("http://3.36.174.74:8080/manager/list/home",
+  const getDataUsingSimpleGetCall = () =>
+  axios.get("http://3.36.174.74:8080/manager/list/home",
       {params:{pageSize:1, pageNumber:5}
       })
   .then(function (request){
