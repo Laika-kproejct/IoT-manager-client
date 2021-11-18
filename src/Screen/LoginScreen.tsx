@@ -12,7 +12,7 @@ import styled from 'styled-components/native';
 import StyledText from '../Components/StyledText';
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Container = styled.View`
     flex: 1;
@@ -65,7 +65,6 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
             AsyncStorage.setItem('accessToken', accessToken); // 비동기로 처리해도 문제없음
             AsyncStorage.setItem('refreshToken', refreshToken);
             console.log("로그인 성공");
-            navigation.navigate('Bottom');
 
         }).catch((error: any) => {
             if (error.response) {
@@ -74,7 +73,7 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
                 console.log(error.response.headers);
 
                 if(error.response.status === 400) {
-                console.log('아이디 혹은 비밀번호가 비었습니다.');
+                console.log('아이디 혹은 비번이 비었습니다.');
                 }                  
                 if(error.response.status === 404) {
                     console.log("로그인 실패");
@@ -109,20 +108,19 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
                 </Title>    
                     <Content>
                     <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center', paddingBottom:30}}>
-                    <Text style={{fontSize:15}}></Text>
+                    <Text style={{fontSize:15}}><Icon ion-icon name="people-outline" size={40} color="black"/></Text>
                         <TextInput 
                         onChangeText={(Id) => setUserId(Id)}
                         placeholder={'아이디'}
-                        style={{borderColor: 'black', width:'80%', height:55, borderWidth: 1, borderRadius: 15}}/>
+                        style={{borderColor: 'black', width:'80%', height:55, borderWidth: 1, borderRadius: 35}}/>
                         </View>
                     <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',paddingBottom:10}}>
-                    <Text></Text>
+                    <Text><Icon ion-icon name="lock-closed-outline" size={40} color="black"/></Text>
                         <TextInput 
                         onChangeText={(password) => setUserPassword(password)}
-                        textContentType='password'
-                        secureTextEntry= {true}
+                        textContentType="password"
                         placeholder={'패스워드'}
-                        style={{borderColor: 'black', width:'80%', height:55, borderWidth: 1, borderRadius: 15}}/>
+                        style={{borderColor: 'black', width:'80%', height:55, borderWidth: 1, borderRadius: 35}}/>
                         </View>
                     </Content>
                     <Footer>

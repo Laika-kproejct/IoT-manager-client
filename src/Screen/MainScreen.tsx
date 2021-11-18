@@ -1,7 +1,10 @@
-import React from 'react';
-import { ImageBackground, Image } from 'react-native';
+import React, { useEffect } from 'react';
+import { ImageBackground,
+            Image } from 'react-native';
 import Styled from 'styled-components/native';
 import StyledText from '../Components/StyledText';
+import messaging from '@react-native-firebase/messaging';
+
 
 const Container = Styled.View`    
     justify-content: center;
@@ -31,6 +34,26 @@ const Touch =Styled.TouchableOpacity`
 const Label = Styled.Text``;
 
 const MainScreen = ({navigation}:{navigation: any}) => {
+
+    async function requestUserPermission() {
+        const authStatus = await messaging().requestPermission();
+        const enabled =
+          authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+          authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+      
+        if (enabled) {
+          console.log('Authorization status:', authStatus);
+        }
+    }
+
+    useEffect(()=>{
+        requestUserPermission().then(result=> {
+            console.log("요청");
+            console.log(result);
+        }).catch(error => {
+            console.error(error);
+        });
+    },[]);
 
     return(
         <Container>
