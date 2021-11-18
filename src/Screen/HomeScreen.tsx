@@ -3,8 +3,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Styled from 'styled-components/native';
 import StyledText from '../Components/StyledText';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Container = Styled.View`
   flex: 1;
@@ -54,16 +55,11 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
     const onPressAddButton = () => {
     navigation.navigate('Add');
   }
-
-    const [page, setPage] = useState('');
-    const [size, setSize] = useState('');
-
-  const getDataUsingSimpleGetCall = () =>{
-  axios.get("http://3.36.174.74:8080/manager/list/home",
-    {params:{pageSize:1, pageNumber:5}
-      
-    }).then((response: any) => {
-
+  
+    const [list, setList] = useState('');
+    useEffect(() => {
+    axios.get("http://3.36.174.74:8080/manager/list/home"
+      ).then((response: any) => {
       const accessToken = response.data.list.accessToken;
       const refreshToken = response.data.list.refreshToken;
       //토큰을 별도 저장
@@ -72,19 +68,21 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
       console.log(refreshToken);
       AsyncStorage.setItem('accessToken', accessToken); // 비동기로 처리해도 문제없음
       AsyncStorage.setItem('refreshToken', refreshToken);
-      console.log("조회 성공");
-  })
-  .catch((error: any) => {
+      //console.log("조회 성공");
+      }).then((data: any) => {
+        setList(data);
+      
+  }).catch((error: any) => {
     if (error.response) {
       console.log(error.response.data);
       console.log(error.response.status);
       console.log(error.response.headers);
 
       if(error.response.status === 400) {
-      console.log('아이디 혹은 비번이 비었습니다.');
+      console.log('.');
       }                  
       if(error.response.status === 404) {
-          console.log("로그인 실패");
+          console.log("실패");
       }
       else if (error.request) {
       // 요청이 이루어 졌으나 응답을 받지 못했습니다.
@@ -96,15 +94,18 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
       // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
         console.log('Error', error.message);
   }
-}
-  });
-}
+  }
+});
+}, []);
+    
   return (
+    
     <Container>
       <Header>
         <Label>관리대상자</Label>
       </Header>
       <Body>
+        
       </Body>
       <Footer>
       <AddButton onPress={() => {
