@@ -55,7 +55,7 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
             email: userId, 
             password: userPassword
             
-        }).then((response: any)=> {
+        }).then((response: any) => {
             const accessToken = response.data.list.accessToken;
             const refreshToken = response.data.list.refreshToken;
             //토큰을 별도 저장
@@ -65,6 +65,7 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
             AsyncStorage.setItem('accessToken', accessToken); // 비동기로 처리해도 문제없음
             AsyncStorage.setItem('refreshToken', refreshToken);
             console.log("로그인 성공");
+            navigation.navigate('Bottom');
 
         }).catch((error: any) => {
             if (error.response) {
