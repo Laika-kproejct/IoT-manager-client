@@ -36,7 +36,6 @@ export const InitNavi = () => {
     component={MainBottomTab}
     options={{headerShown:false}}/>
     
-
     <Stack.Screen
     name="Add"
     component={ListAddScreen}

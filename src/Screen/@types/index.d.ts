@@ -1,10 +1,10 @@
 type RootStackParamList = {
+  Main: undefined;
   Login: undefined;
   SignUp: undefined;
   Bottom:  undefined;
-  Add: undefined;
   First: undefined;
-  Main: undefined;
+  Add: undefined;
 };
     
     

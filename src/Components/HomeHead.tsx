@@ -1,14 +1,15 @@
 import 'react-native-gesture-handler';
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native'
-//import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 const HomeHead = ({navigation}:{navigation:any}) => {
-
-    
+    const AddButton = () => {
+        
+        navigation.navigate('Add');
+    }
         return (
             <View style={styles.container}>
                 <View style={styles.input}> 
@@ -19,7 +20,7 @@ const HomeHead = ({navigation}:{navigation:any}) => {
                     />
                     <TouchableOpacity>
                         <Icon style={styles.addBtn} size={30} name='plus-circle' 
-                        onPress= {()=>{ navigation.navigate('Add') }}/>
+                        onPress= {()=>{ AddButton() }}/>
                     </TouchableOpacity>
                 </View>
             </View>

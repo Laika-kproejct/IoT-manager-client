@@ -54,8 +54,7 @@ const Label = Styled.Text`
     color: white;
 `;
 
-const HomeScreen = () => {
-
+const HomeScreen = ({navigation}:{navigation:any}) => {
 
     /*
       const accessToken = response.data.list.accessToken;
@@ -76,8 +75,9 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
         <Text style={styles.title}>관리대상자 목록</Text>
-        <HomeHead navigation />
+        <HomeHead navigation/>
         <HomeBody navigation/>
+        <Footer><AddButton onPress={()=>{navigation.navigate('Add')}}/></Footer>
     </View>
     /*
     <Container>

@@ -108,20 +108,21 @@ const LoginScreen = ({navigation}:{navigation:any}) => {
                 <StyledText fontWeight="700" size="50px" center>로그인</StyledText>
                 </Title>    
                     <Content>
-                    <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center', paddingBottom:30}}>
-                    <Text style={{fontSize:15}}><Icon ion-icon name="people-outline" size={40} color="black"/></Text>
+                    <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center', paddingBottom:20}}>
+                    <Text><Icon ion-icon name="people-outline" size={30} color="black"/></Text>
                         <TextInput 
                         onChangeText={(Id) => setUserId(Id)}
                         placeholder={'아이디'}
-                        style={{borderColor: 'black', width:'80%', height:55, borderWidth: 1, borderRadius: 35}}/>
+                        style={{borderColor: 'black', width:'80%', height:45, borderWidth: 1, borderRadius: 15}}/>
                         </View>
                     <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',paddingBottom:10}}>
-                    <Text><Icon ion-icon name="lock-closed-outline" size={40} color="black"/></Text>
+                    <Text><Icon ion-icon name="lock-closed-outline" size={30} color="black"/></Text>
                         <TextInput 
                         onChangeText={(password) => setUserPassword(password)}
                         textContentType="password"
+                        secureTextEntry={true}
                         placeholder={'패스워드'}
-                        style={{borderColor: 'black', width:'80%', height:55, borderWidth: 1, borderRadius: 35}}/>
+                        style={{borderColor: 'black', width:'80%', height:45, borderWidth: 1, borderRadius: 15}}/>
                         </View>
                     </Content>
                     <Footer>

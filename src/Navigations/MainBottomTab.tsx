@@ -8,6 +8,7 @@ import SettingScreen from '../Screen/SettingScreen';
 import SomethingScreen from '../Screen/SomethingScreen';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import HomeHead from '../Components/HomeHead';
 
 const MainBottom = createMaterialBottomTabNavigator();
 
