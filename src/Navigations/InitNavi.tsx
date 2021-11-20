@@ -43,7 +43,7 @@ const InitNavi = () => {
     component={ListAddScreen}
     options={{headerShown:false}}/>
     </Stack.Navigator>
-       
+    
     );
 };
 export default InitNavi;

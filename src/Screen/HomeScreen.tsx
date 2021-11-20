@@ -1,11 +1,14 @@
 import { State } from 'react-native-gesture-handler';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Styled from 'styled-components/native';
+import { StyleSheet, View, Text } from 'react-native';
 import StyledText from '../Components/StyledText';
-import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { axiosApiInstance } from '../Modules/axiosApiInstance';
+import HomeHead from '../Components/HomeHead';
+import HomeBody from '../Components/HomeBody';
 
 const Container = Styled.View`
   flex: 1;
@@ -52,26 +55,40 @@ const Label = Styled.Text`
 `;
 
 const HomeScreen = ({navigation}: {navigation: any}) => {
-    const onPressAddButton = () => {
+/*
+  const onPressAddButton = () =>{
     navigation.navigate('Add');
-  }
-  
-    const [list, setList] = useState('');
-    useEffect(() => {
-    axios.get("http://3.36.174.74:8080/manager/list/home"
-      ).then((response: any) => {
+  } */
+
+  const [userpage, setPage] = useState('');
+  const [usersize, setSize] = useState('');
+  //const ApiInstance=axiosApiInstance();
+
+  const SearchAPI = () => {
+    axiosApiInstance.get("http://3.36.174.74:8080/manager/list/home",{
+    }
+    ).then((response: any) => {
+      console.log('');
+      
+
+    /*
       const accessToken = response.data.list.accessToken;
       const refreshToken = response.data.list.refreshToken;
-      //토큰을 별도 저장
-      //홈화면으로 이동
+            //토큰을 별도 저장
+            //홈화면으로 이동
       console.log(accessToken);
-      console.log(refreshToken);
-      AsyncStorage.setItem('accessToken', accessToken); // 비동기로 처리해도 문제없음
-      AsyncStorage.setItem('refreshToken', refreshToken);
-      //console.log("조회 성공");
-      }).then((data: any) => {
-        setList(data);
+      console.log(refreshToken);*/
+        /*
+      usersize.map((list : any) => (
+        (list.homeId < 10) ? (
+            <Label key={list.homeId}>
+                {list.address}
+            </Label>)
+        : null
+    ))*/
+    
       
+
   }).catch((error: any) => {
     if (error.response) {
       console.log(error.response.data);
@@ -93,19 +110,39 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
         else {
       // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
         console.log('Error', error.message);
-  }
-  }
-});
-}, []);
-    
+      }
+    }
+  });
+}/*
+  if(usersize.length > 0) {
   return (
-    
+      usersize.map((list : any) => (
+          (list.homeId < 10) ? (
+              <Label key={list.homeId}>
+                  {list.address}
+              </Label>)
+          : null
+      ))
+    );
+  }
+  else{ */   
+  return (
+    <View style={styles.container}>
+        <Text style={styles.title}>관리대상자 목록</Text>
+        <HomeHead navigation={undefined} />
+        <HomeBody />
+    </View>
+    /*
     <Container>
       <Header>
         <Label>관리대상자</Label>
       </Header>
-      <Body>
-        
+      <Body>   
+      <AddButton onPress={() => {
+            SearchAPI();
+          }}>
+            <StyledText>추가</StyledText>
+      </AddButton>      
       </Body>
       <Footer>
       <AddButton onPress={() => {
@@ -114,8 +151,23 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
             <StyledText>추가</StyledText>
           </AddButton>
       </Footer>    
-    </Container>
-  );
-};
+    </Container>*/
+    );
+  }
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      flexDirection: 'column',
+      paddingTop: 50,
+      backgroundColor: "#EEE",
+    },
+    title: {
+      fontWeight: "800",
+      fontSize: 30, 
+      marginLeft: 20,
+      marginBottom: 20,
+    }
+  });
+//};
 
 export default HomeScreen;

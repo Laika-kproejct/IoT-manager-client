@@ -25,28 +25,32 @@ const MainBottomTab = () => {
             name="First"
             component={HomeScreen}
             options={{
-                tabBarLabel: '홈'
+                tabBarLabel: '홈',
+                tabBarIcon: ({color}) => <Icon name="home" color={color} size={26} />
             }}     
             />
             <MainBottom.Screen
             name="Second"
             component={SecondScreen}
             options={{
-                tabBarLabel: '레시피'
+                tabBarLabel: '레시피',
+                tabBarIcon: ({color}) => <Icon name="people" color={color} size={26} />
             }} 
             />
             <MainBottom.Screen
             name="Third"
             component={SettingScreen}
             options={{
-                tabBarLabel: '센서'
+                tabBarLabel: '센서',
+                tabBarIcon: ({color}) => <Icon name="git-branch-outline" color={color} size={26} />
             }} 
             />
             <MainBottom.Screen
             name="Fourth"
             component={SomethingScreen}
             options={{
-                tabBarLabel: '관리'
+                tabBarLabel: '관리',
+                tabBarIcon: ({color}) => <Icon name="menu-outline" color={color} size={26} />
             }} 
             />
         </MainBottom.Navigator>

@@ -1,0 +1,53 @@
+import { useNavigation } from '@react-navigation/native';
+import React, { Component } from 'react';
+import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native'
+//import { MaterialCommunityIcons } from 'react-native-vector-icons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+
+const HomeHead = () => {
+
+    const navi = useNavigation(); 
+        return (
+            <View style={styles.container}>
+                <View style={styles.input}> 
+                    <TextInput 
+                        style={styles.inputText}
+                        placeholder='검색'
+                        autoCorrect={ false }
+                    />
+                    <TouchableOpacity>
+                        <Icon style={styles.addBtn} size={30} name='plus-circle' 
+                        />
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
+    };
+    
+const styles = StyleSheet.create({
+    container: {
+        marginLeft: 20,
+        marginRight: 20,
+    },
+    input: {
+        borderRadius: 10,
+        backgroundColor: "#FFF",
+        paddingLeft: 10,
+        paddingRight: 10,
+        height: 50,
+        alignItems: "center",
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderBottomColor: "#bbb",
+        borderBottomWidth: StyleSheet.hairlineWidth,
+    },
+    inputText: {
+        flex: 1,
+    },
+    addBtn: {
+        color: '#4169E1'
+    }
+});
+
+export default HomeHead;
