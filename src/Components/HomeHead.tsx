@@ -18,10 +18,6 @@ const HomeHead = ({navigation}:{navigation:any}) => {
                         placeholder='검색'
                         autoCorrect={ false }
                     />
-                    <TouchableOpacity>
-                        <Icon style={styles.addBtn} size={30} name='plus-circle' 
-                        onPress= {()=>{ AddButton() }}/>
-                    </TouchableOpacity>
                 </View>
             </View>
         )

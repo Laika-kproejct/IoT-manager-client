@@ -7,8 +7,10 @@ import StyledText from '../Components/StyledText';
 import { NavigationContainer } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { axiosApiInstance } from '../Modules/axiosApiInstance';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeHead from '../Components/HomeHead';
 import HomeBody from '../Components/HomeBody';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const Container = Styled.View`
   flex: 1;
@@ -40,13 +42,7 @@ const Footer = Styled.View`
 `;
 
 const AddButton = Styled.TouchableOpacity`
-  width: 100%;
-  height: 40px;
-  border: 1px solid gray;
-  background-color: white;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
+  
 `;
 
 const Label = Styled.Text`
@@ -76,8 +72,15 @@ const HomeScreen = ({navigation}:{navigation:any}) => {
     <View style={styles.container}>
         <Text style={styles.title}>관리대상자 목록</Text>
         <HomeHead navigation/>
+        <ScrollView>
         <HomeBody navigation/>
-        <Footer><AddButton onPress={()=>{navigation.navigate('Add')}}/></Footer>
+        </ScrollView>
+        <Footer>
+          <AddButton>
+            <Icon style={styles.addBtn} size={50}  name='plus-circle'
+            onPress={()=>{navigation.navigate('Add')}}></Icon>
+          </AddButton>
+        </Footer>
     </View>
     /*
     <Container>
@@ -113,7 +116,10 @@ const HomeScreen = ({navigation}:{navigation:any}) => {
       fontSize: 30, 
       marginLeft: 20,
       marginBottom: 20,
-    }
+    },
+    addBtn: {
+      color: '#4169E1'
+  }
 });
 //};
 

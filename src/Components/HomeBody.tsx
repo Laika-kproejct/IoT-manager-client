@@ -1,24 +1,37 @@
 import 'react-native-gesture-handler';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 //import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { axiosApiInstance } from '../Modules/axiosApiInstance';
 import { NavigationContainer } from '@react-navigation/native';
+import { ScrollView } from 'react-native-gesture-handler';
+
+export interface PostType {
+	content?: string;
+	homeId?: number;
+	address?: string;
+	personList: string;
+    page:number;
+    size:number;
+}
 
 const HomeBody = ({navigation}:{navigation:any}) => {
+    const [home, setHome] = useState<PostType[]>([]);
     //const SearchAPI = () => {
         axiosApiInstance.get("http://3.36.174.74:8080/manager/list/home",{
             
         }).then((response: any) => {
-        console.log(response.data);
-        console.log(response.status);
-    
+        //console.log(response.data);
+        //console.log(response.status);
+        //console.log(response.config);
+        //console.log(response.data.list.content);
+        setHome(response.data.list.content);
+            
         }).catch((error: any) => {
         if (error.response) {
         console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
+        
     
         if(error.response.status === 400) {
         console.log('.');
@@ -40,23 +53,29 @@ const HomeBody = ({navigation}:{navigation:any}) => {
         });
     //} 
         return (
+            
             <View style={styles.container}>
                 
+                {home.map(content =>(
                         <View style={styles.todo}>
                             <View style={styles.todoText}>
                                 <TouchableOpacity style={styles.todoCheckbox}>
                                 </TouchableOpacity>
-                                <Text></Text>
+                                <Text key = {content.size}>
+                                {content.address}
+                                </Text>
                             </View>
                             <TouchableOpacity>
                                 <Icon style={styles.todoDelBtn} size={30} name='delete-outline' 
-                                onPress={()=>{ navigation.navigate('Add') }}/>
+                                />
                             </TouchableOpacity>
+                            
                         </View>
+                    ))}
                     
                 
             </View>
-        )
+        );
 }
 
 const styles = StyleSheet.create({
@@ -81,6 +100,7 @@ const styles = StyleSheet.create({
     },
     todoText: {
         flexDirection: 'row',
+        fontSize: 10,
     },
     todoDelBtn: {
         color: '#777'
