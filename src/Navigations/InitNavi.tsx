@@ -3,7 +3,7 @@ import React from 'react';
 import { Text } from 'react-native';
 import { Icon } from 'react-native-vector-icons/Icon';
 import styled from 'styled-components';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MainScreen from '../Screen/MainScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import LoginScreen from '../Screen/LoginScreen';
@@ -11,11 +11,10 @@ import SignUpScreen from '../Screen/SignUpScreen';
 import MainBottomTab from './MainBottomTab';
 import ListAddScreen from '../Screen/ListAddScreen';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const InitNavi = () => {
+export const InitNavi = () => {
     return(
-    
     <Stack.Navigator initialRouteName="Main">
     <Stack.Screen
     name="Main"

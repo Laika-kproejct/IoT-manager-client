@@ -1,23 +1,19 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
+
 import HomeScreen from '../Screen/HomeScreen';
 import SecondScreen from '../Screen/SecondScreen';
 import SettingScreen from '../Screen/SettingScreen';
 import SomethingScreen from '../Screen/SomethingScreen';
-import { color } from 'react-native-reanimated';
-import Icon from 'react-native-vector-icons/Ionicons';
-import PropTypes from "prop-types";
 
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const MainBottom = createMaterialBottomTabNavigator();
 
-const MainBottomTab = () => {
+export const MainBottomTab = () => {
     
     return(
-        
-
         <MainBottom.Navigator initialRouteName='First'
         
         >

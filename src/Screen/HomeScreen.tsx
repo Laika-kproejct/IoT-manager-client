@@ -1,4 +1,4 @@
-import { State } from 'react-native-gesture-handler';
+import 'react-native-gesture-handler';
 import axios from 'axios';
 import React, { useState } from 'react';
 import Styled from 'styled-components/native';
@@ -54,22 +54,8 @@ const Label = Styled.Text`
     color: white;
 `;
 
-const HomeScreen = ({navigation}: {navigation: any}) => {
-/*
-  const onPressAddButton = () =>{
-    navigation.navigate('Add');
-  } */
+const HomeScreen = () => {
 
-  const [userpage, setPage] = useState('');
-  const [usersize, setSize] = useState('');
-  //const ApiInstance=axiosApiInstance();
-
-  const SearchAPI = () => {
-    axiosApiInstance.get("http://3.36.174.74:8080/manager/list/home",{
-    }
-    ).then((response: any) => {
-      console.log('');
-      
 
     /*
       const accessToken = response.data.list.accessToken;
@@ -86,51 +72,12 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
             </Label>)
         : null
     ))*/
-    
-      
-
-  }).catch((error: any) => {
-    if (error.response) {
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
-
-      if(error.response.status === 400) {
-      console.log('.');
-      }                  
-      if(error.response.status === 404) {
-          console.log("실패");
-      }
-      else if (error.request) {
-      // 요청이 이루어 졌으나 응답을 받지 못했습니다.
-      // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
-      // Node.js의 http.ClientRequest 인스턴스입니다.
-      console.log(error.request);
-  }
-        else {
-      // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
-        console.log('Error', error.message);
-      }
-    }
-  });
-}/*
-  if(usersize.length > 0) {
-  return (
-      usersize.map((list : any) => (
-          (list.homeId < 10) ? (
-              <Label key={list.homeId}>
-                  {list.address}
-              </Label>)
-          : null
-      ))
-    );
-  }
-  else{ */   
+  
   return (
     <View style={styles.container}>
         <Text style={styles.title}>관리대상자 목록</Text>
-        <HomeHead navigation={undefined} />
-        <HomeBody />
+        <HomeHead navigation />
+        <HomeBody navigation/>
     </View>
     /*
     <Container>
@@ -153,7 +100,7 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
       </Footer>    
     </Container>*/
     );
-  }
+}
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -167,7 +114,7 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
       marginLeft: 20,
       marginBottom: 20,
     }
-  });
+});
 //};
 
 export default HomeScreen;

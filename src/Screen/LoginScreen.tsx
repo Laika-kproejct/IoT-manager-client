@@ -45,7 +45,7 @@ const Footer = styled.View`
     justify-content: center;
 `;
 
-const LoginScreen = ({navigation}: {navigation: any}) => {
+const LoginScreen = ({navigation}:{navigation:any}) => {
     //<View style={styled.Container}>
     const [userId, setUserId] = useState('');
     const [userPassword, setUserPassword] = useState('');

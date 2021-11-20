@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React, { useEffect } from 'react';
 import { ImageBackground,
             Image } from 'react-native';
@@ -33,7 +34,7 @@ const Touch =Styled.TouchableOpacity`
 `;
 const Label = Styled.Text``;
 
-const MainScreen = ({navigation}:{navigation: any}) => {
+const MainScreen = ({navigation}:{navigation:any}) => {
 
     async function requestUserPermission() {
         const authStatus = await messaging().requestPermission();

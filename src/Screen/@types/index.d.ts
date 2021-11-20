@@ -1,14 +1,10 @@
-/*
-export type StackParamList = {
-
-  Profile: undefined;
-  
-  };
-
-type Props = {
-
-navigation: StackNavigationProp<StackParamList,'Profile' >;
-    
-}*/
+type RootStackParamList = {
+  Login: undefined;
+  SignUp: undefined;
+  Bottom:  undefined;
+  Add: undefined;
+  First: undefined;
+  Main: undefined;
+};
     
     
