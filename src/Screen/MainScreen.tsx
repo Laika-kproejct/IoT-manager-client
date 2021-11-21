@@ -12,12 +12,12 @@ const Container = Styled.View`
     align-items: center;
 `;
 const Body = Styled.View`
-    height:80%
+    height:70%
     justifyContent: center;
     alignItems: center;
 `;
 const Footer = Styled.View`
-    height: 20%;
+    height: 30%;
     width:100%;
     justifyContent: center;
     alignItems: center;

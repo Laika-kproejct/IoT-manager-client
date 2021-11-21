@@ -1,37 +1,11 @@
 import 'react-native-gesture-handler';
-import axios from 'axios';
 import React, { useState } from 'react';
 import Styled from 'styled-components/native';
 import { StyleSheet, View, Text } from 'react-native';
-import StyledText from '../Components/StyledText';
-import { NavigationContainer } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { axiosApiInstance } from '../Modules/axiosApiInstance';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeHead from '../Components/HomeHead';
 import HomeBody from '../Components/HomeBody';
-import { ScrollView } from 'react-native-gesture-handler';
 
-const Container = Styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  
-`;
-const Header = Styled.View`
-  width: 100%;
-  height: 10%;
-  background-color: #2058e6; 
-  justify-content: center;
-  align-items: center;
-`;
-const Body = Styled.View`
-  width: 100%;
-  height: 80%;
-  background-color: white;
-  justify-content: center;
-  align-items: center;
-`;
 
 const Footer = Styled.View`
   width: 100%;
@@ -39,40 +13,21 @@ const Footer = Styled.View`
   background-color: white;
   justify-content: center;
   align-items: center;
+  backgroundColor: #EEE;
 `;
 
 const AddButton = Styled.TouchableOpacity`
-  
-`;
 
-const Label = Styled.Text`
-    font-size: 15px;    
-    color: white;
 `;
 
 const HomeScreen = ({navigation}:{navigation:any}) => {
 
-    /*
-      const accessToken = response.data.list.accessToken;
-      const refreshToken = response.data.list.refreshToken;
-            //토큰을 별도 저장
-            //홈화면으로 이동
-      console.log(accessToken);
-      console.log(refreshToken);*/
-        /*
-      usersize.map((list : any) => (
-        (list.homeId < 10) ? (
-            <Label key={list.homeId}>
-                {list.address}
-            </Label>)
-        : null
-    ))*/
-  
+
   return (
     <View style={styles.container}>
         <Text style={styles.title}>관리대상자 목록</Text>
         <HomeHead/>
-        <HomeBody navigation/>
+        <HomeBody/>
         <Footer>
           <AddButton>
             <Icon style={styles.addBtn} size={50}  name='plus-circle'

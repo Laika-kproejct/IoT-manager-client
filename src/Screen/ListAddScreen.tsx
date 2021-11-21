@@ -17,9 +17,11 @@ const Container = styled.View`
     border-radius: 10;
     
 `;
-const Header = styled.View`
-    width: 100%;
-    height: 20%;
+const Header = styled.Text`
+    fontWeight: 800;
+    fontSize: 30;
+    marginLeft: 20;
+    margin-bottom: 20;
     justifyContent: center;
     alignItems: center;
     
@@ -113,9 +115,7 @@ const ListAddScreen = ({navigation}:{navigation:any}) =>{
 }
     return(
         <Container>
-            <Header>
-                <StyledText color="black" fontWeight="500" size="40px">등록 하기</StyledText>
-            </Header>
+            <Header>등록하기</Header>
             <Body>
                 <Input placeholder={'주소 입력'}
                 onChangeText={(address) => setUserAddress(address)}/>
@@ -125,7 +125,7 @@ const ListAddScreen = ({navigation}:{navigation:any}) =>{
 
             <Footer>
                 <Btn onPress={()=>{onClickregister()}}>
-                    <StyledText color="white">등록</StyledText>
+                    <StyledText color="white">확인</StyledText>
                 </Btn>
             </Footer>
         </Container>

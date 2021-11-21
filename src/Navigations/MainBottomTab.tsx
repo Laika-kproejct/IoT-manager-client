@@ -4,11 +4,10 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 
 import HomeScreen from '../Screen/HomeScreen';
 import SecondScreen from '../Screen/SecondScreen';
-import SettingScreen from '../Screen/SettingScreen';
+import SensorScreen from '../Screen/SensorScreen';
 import SomethingScreen from '../Screen/SomethingScreen';
 
 import Icon from 'react-native-vector-icons/Ionicons';
-import HomeHead from '../Components/HomeHead';
 
 const MainBottom = createMaterialBottomTabNavigator();
 
@@ -36,7 +35,7 @@ export const MainBottomTab = () => {
             />
             <MainBottom.Screen
             name="Third"
-            component={SettingScreen}
+            component={SensorScreen}
             options={{
                 tabBarLabel: '센서',
                 tabBarIcon: ({color}) => <Icon name="git-branch-outline" color={color} size={26} />

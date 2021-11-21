@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 //import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -14,11 +14,13 @@ export interface PostType {
 	personList: string;
     page:number;
     size:number;
+    
 }
 
-const HomeBody = ({navigation}:{navigation:any}) => {
+const HomeBody = () => {
     const [home, setHome] = useState<PostType[]>([]);
     //const SearchAPI = () => {
+        
         axiosApiInstance.get("http://3.36.174.74:8080/manager/list/home",{
             
         }).then((response: any) => {
@@ -59,9 +61,7 @@ const HomeBody = ({navigation}:{navigation:any}) => {
                 {home.map(content =>(
                         <View style={styles.todo}>
                             <View style={styles.todoText}>
-                                <TouchableOpacity style={styles.todoCheckbox}>
-                                </TouchableOpacity>
-                                <Text key = {content.page}>
+                                <Text>
                                 {content.address}
                                 </Text>
                             </View>
