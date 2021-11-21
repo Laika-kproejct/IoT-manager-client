@@ -4,6 +4,7 @@ import { ImageBackground, Text, TextInput } from 'react-native';
 import Styled from 'styled-components/native';
 import StyledText from '../Components/StyledText';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Container = Styled.View`
   flex: 1;
@@ -19,11 +20,7 @@ const Body = Styled.View`
     width: 80%;
     justify-Content: center;
 `;
-const Title = Styled.Text`
-  width: 100%;
-  height: 30%;
-  fontSize: 50px;
-`;
+
 const Footer = Styled.View`
     width: 100%;
     height: 10%;
@@ -31,18 +28,6 @@ const Footer = Styled.View`
     align-items: center;
     background-color: #5279DD;
     color: white;
-`;
-const Label = Styled.Text``;
-
-const Input = Styled.TextInput`
-    width: 100%;
-    border: 1px solid gray;
-    outline: none;
-    border-radius: 0px;
-    line-height: 2.5rem;
-    font-size: 1.2rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
 `;
 
 const SignUpScreen = ({navigation}: {navigation: any}) => {
@@ -61,10 +46,15 @@ const SignUpScreen = ({navigation}: {navigation: any}) => {
 }).then((response: any) => {
     const accessToken = response.data.list.accessToken;
     const refreshToken = response.data.list.refreshToken;
-    
+
+    console.log(refreshToken);
+    console.log(accessToken);
+    AsyncStorage.setItem('accessToken', accessToken);
+    AsyncStorage.setItem('refreshToken', refreshToken);
+    navigation.navigate('Login');
+    console.log('회원가입 성공');
     //토큰을 별도 저장
     //홈화면으로 이동
-    console.log(accessToken);
 }).catch((error: any) => {
     if (error.response) {
         // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.

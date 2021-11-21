@@ -22,7 +22,7 @@ const HomeBody = ({navigation}:{navigation:any}) => {
         axiosApiInstance.get("http://3.36.174.74:8080/manager/list/home",{
             
         }).then((response: any) => {
-        //console.log(response.data);
+        
         //console.log(response.status);
         //console.log(response.config);
         //console.log(response.data.list.content);
@@ -55,13 +55,13 @@ const HomeBody = ({navigation}:{navigation:any}) => {
         return (
             
             <View style={styles.container}>
-                
+                <ScrollView>
                 {home.map(content =>(
                         <View style={styles.todo}>
                             <View style={styles.todoText}>
                                 <TouchableOpacity style={styles.todoCheckbox}>
                                 </TouchableOpacity>
-                                <Text key = {content.size}>
+                                <Text key = {content.page}>
                                 {content.address}
                                 </Text>
                             </View>
@@ -72,7 +72,7 @@ const HomeBody = ({navigation}:{navigation:any}) => {
                             
                         </View>
                     ))}
-                    
+                    </ScrollView>
                 
             </View>
         );

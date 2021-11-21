@@ -4,8 +4,7 @@ import styled from 'styled-components/native';
 import StyledText from '../Components/StyledText';
 import axios from 'axios';
 import { axiosApiInstance } from '../Modules/axiosApiInstance';
-import { Alert } from 'react-native';
-import { NavigationRouteContext } from '@react-navigation/native';
+
 
 const Container = styled.View`
     flex: 1;
@@ -14,12 +13,20 @@ const Container = styled.View`
     margin-vertical: 5;
     margin-horizontal: 20;
     padding: 10px;
-    background-color: lightgray;
+    background-color: #FFF;
     border-radius: 10;
+    
+`;
+const Header = styled.View`
+    width: 100%;
+    height: 20%;
+    justifyContent: center;
+    alignItems: center;
+    
 `;
 const Body = styled.View`
     width: 100%;
-    height: 80%;
+    height: 60%;
     justifyContent: center;
     alignItems: center;
 `;
@@ -33,9 +40,9 @@ const Input = styled.TextInput`
     border-color: black;
     width: 90%; 
     height: 45; 
-    border-width: 1;
+    border-width: 0.5;
     margin-bottom: 15;
-    border-radius: 5;
+    border-radius: 10;
     
 `;
 const Btn = styled.TouchableOpacity`
@@ -106,17 +113,21 @@ const ListAddScreen = ({navigation}:{navigation:any}) =>{
 }
     return(
         <Container>
-        <Body>
-        <Input placeholder={'주소 입력'}
-        onChangeText={(address) => setUserAddress(address)}/>
-        <Input placeholder={'이름 입력'}
-        onChangeText={(personList) => setUserName(personList)}/>
-        </Body>
-        <Footer>
-        <Btn onPress={()=>{onClickregister()}}>
-            <StyledText color="white">등록</StyledText>
-        </Btn>
-        </Footer>
+            <Header>
+                <StyledText color="black" fontWeight="500" size="40px">등록 하기</StyledText>
+            </Header>
+            <Body>
+                <Input placeholder={'주소 입력'}
+                onChangeText={(address) => setUserAddress(address)}/>
+                <Input placeholder={'이름 입력'}
+                onChangeText={(personList) => setUserName(personList)}/>
+            </Body>
+
+            <Footer>
+                <Btn onPress={()=>{onClickregister()}}>
+                    <StyledText color="white">등록</StyledText>
+                </Btn>
+            </Footer>
         </Container>
     );
 

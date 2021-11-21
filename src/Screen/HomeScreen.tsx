@@ -71,10 +71,8 @@ const HomeScreen = ({navigation}:{navigation:any}) => {
   return (
     <View style={styles.container}>
         <Text style={styles.title}>관리대상자 목록</Text>
-        <HomeHead navigation/>
-        <ScrollView>
+        <HomeHead/>
         <HomeBody navigation/>
-        </ScrollView>
         <Footer>
           <AddButton>
             <Icon style={styles.addBtn} size={50}  name='plus-circle'

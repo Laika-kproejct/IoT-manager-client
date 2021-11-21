@@ -1,15 +1,9 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { StyleSheet, View, TextInput } from 'react-native'
 
-
-const HomeHead = ({navigation}:{navigation:any}) => {
-    const AddButton = () => {
-        
-        navigation.navigate('Add');
-    }
+const HomeHead = () => {
+    
         return (
             <View style={styles.container}>
                 <View style={styles.input}> 
