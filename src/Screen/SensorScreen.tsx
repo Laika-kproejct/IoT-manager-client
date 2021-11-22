@@ -59,8 +59,8 @@ export interface PostType2 {
   content?:string|number;
   homeId?:number;
 }
-export const SensorScreen = ({navigation}:{navigation:any},{route}:{route:any}) => {
-
+export const SensorScreen = (props: any) => {
+  const {navigation, route} = props;
   const [sensor, setSensor] = useState<PostType2[]>([]);
   //const SearchAPI = () => {
   const {homeId} = route.params;

@@ -63,9 +63,8 @@ export interface props{
   params?:number|string;
 }
 
-export const HomeScreen = ({navigation}:{navigation:any}, props:any) => {
-
-  const {homeId} = props.route.params;
+export const HomeScreen = (props:any) => {
+  const {navigation} = props;
   const [home, setHome] = useState<PostType[]>([]);
   //const [idhome, setIdhome] = useState('');
       
@@ -109,26 +108,27 @@ export const HomeScreen = ({navigation}:{navigation:any}, props:any) => {
     <Container>
         <Header>관리대상자 목록</Header>
         <Content>
-        {home.map(row => (
         <ScrollView>
+        {home.map(row => (
           <List>
-            <StyledText size="12px">
+            <StyledText size="20px">
             {row.address},{row.homeId}
             </StyledText>
               <AddButton>
                 <Icon color='#777' size={30} name='delete-outline'
                 onPress={()=>{
-                  props.navigation.navigate('Sensor',{
+                  navigation.navigate('Sensor',{
 
-                  homeId:{homeId}
-                  
+                  homeId:row.homeId
+
                 })
                 }}
               />
               </AddButton>
           </List>
+        ))
+        }
         </ScrollView>
-        ))}
         </Content>
         <Footer>
           <AddButton>

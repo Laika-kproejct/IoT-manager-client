@@ -1,10 +1,12 @@
 import 'react-native-gesture-handler';
 import React, { useEffect } from 'react';
 import { ImageBackground,
-            Image } from 'react-native';
+            Image, 
+            Alert} from 'react-native';
 import Styled from 'styled-components/native';
 import StyledText from '../Components/StyledText';
 import messaging from '@react-native-firebase/messaging';
+import { firebase } from '@react-native-firebase/messaging';
 
 
 const Container = Styled.View`    
@@ -35,15 +37,27 @@ const Touch =Styled.TouchableOpacity`
 const Label = Styled.Text``;
 
 const MainScreen = ({navigation}:{navigation:any}) => {
+    /*
 
+    firebase.initializeApp({
+        appId: 'ab',
+        apiKey: 'ac',
+        projectId: 'as',
+        databaseURL: 'ad',
+        storageBucket: 'ac',
+        messagingSenderId: 'a',
+        clientId: 'a',
+    });
+    
+    
     async function requestUserPermission() {
         const authStatus = await messaging().requestPermission();
         const enabled =
-          authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-          authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-      
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+        
         if (enabled) {
-          console.log('Authorization status:', authStatus);
+        console.log('Authorization status:', authStatus);
         }
     }
 
@@ -54,7 +68,7 @@ const MainScreen = ({navigation}:{navigation:any}) => {
         }).catch(error => {
             console.error(error);
         });
-    },[]);
+    },[]);*/
 
     return(
         <Container>
