@@ -5,6 +5,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Styled from 'styled-components/native';
 import StyledText from '../Components/StyledText';
 import { axiosApiInstance } from '../Modules/axiosApiInstance';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Container = Styled.View`
   flex: 1;
@@ -45,7 +46,9 @@ const Footer = Styled.View`
   align-items: center;
   background-color: #EEE;
 `;
+const AddButton = Styled.TouchableOpacity`
 
+`;
 export interface PostType2 {
 	
 	page: number; // page는 페이지 번호
@@ -53,24 +56,24 @@ export interface PostType2 {
   sensorid: number;
   token?: string;
   list?:number;
-  
+  content?:string|number;
+  homeId?:number;
 }
-const SensorScreen = () => {
+export const SensorScreen = ({navigation}:{navigation:any},{route}:{route:any}) => {
+
   const [sensor, setSensor] = useState<PostType2[]>([]);
-    //const SearchAPI = () => {
-      
-        axiosApiInstance.get("http://3.36.174.74:8080/manager/list/home/"+1+"/sensor",{
-          params:{
-	          page: 0, // page는 페이지 번호
-	          size: 3 //size는 한 페이지에 나오는 아이템 개수
-          }
-      
+  //const SearchAPI = () => {
+  const {homeId} = route.params;
+        axiosApiInstance.get("http://3.36.174.74:8080/manager/list/home/"+homeId+"/sensor",{  
+          
         }).then((response: any) => {
-        console.log(response.data);
+        console.log(response.data.list.content.sensorid);
+        console.log(route);
+        console.log(route.params);
         //console.log(response.data.list.content);
         //setSensor(response.data.list.sensorid);
-        const slist = response.data.list.content;
-          
+        //const slist = response.data.list.content;
+        setSensor(response.data.list.content);  
         }).catch((error: any) => {
         if (error.response) {
         console.log(error.response.data);
@@ -101,14 +104,23 @@ const SensorScreen = () => {
         <ScrollView>
             {sensor.map(row => (
             <List>
-              <Text>
-                {row.sensorid}
-              </Text>
+              <StyledText size="15px">
+              {row.sensorid}
+              </StyledText>
             </List>
               ))}
         </ScrollView>
         </Content>
-        <Footer/>
+        <Footer>
+        <AddButton>
+            <Icon color="blue" size={30} name='plus-circle'
+            onPress={()=>{navigation.navigate('SensorToken')}}></Icon>
+          </AddButton>
+          <AddButton>
+            <Icon color="blue" size={30} name='plus-circle'
+            onPress={()=>{navigation.navigate('Add')}}></Icon>
+          </AddButton>
+          </Footer>
     </Container>
   );
 };

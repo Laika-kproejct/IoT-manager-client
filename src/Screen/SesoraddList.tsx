@@ -1,21 +1,23 @@
 import React from 'react';
-import Styled from 'styled-components';
+import styled from 'styled-components/native';
 import axios from 'axios';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import StyledText from '../Components/StyledText';
 
-const Container = Styled.view`
+const Container = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
 
 `;
-const Header = Styled.view`
+const Header = styled.View`
     width: 100%;
     height: 10%;
     background-color: #2058e6; 
     justify-content: center;
     align-items: center;
 `;
-const Body = Styled.view`
+const Body = styled.View`
     width: 100%;
     height: 80%;
     background-color: white;
@@ -23,7 +25,7 @@ const Body = Styled.view`
     align-items: center;
 `;
 
-const Footer = Styled.view`
+const Footer = styled.View`
     width: 100%;
     height: 10%;
     background-color: white;
@@ -31,10 +33,14 @@ const Footer = Styled.view`
     align-items: center;
 `;
 
-const SesorList = () =>{
+const AddButton = styled.TouchableOpacity`
+
+`;
+
+const SesoraddList = () =>{
     return(
-        <Footer></Footer>
+        <Footer><StyledText>ㅎㅇㅎㅇ</StyledText></Footer>
     )
 };
 
-export default SesorList;
+export default SesoraddList;

@@ -5,6 +5,9 @@ type RootStackParamList = {
   Bottom:  undefined;
   First: undefined;
   Add: undefined;
+  Sensor:undefined;
+  SensorAdd:undefined;
+  SensorToken:undefined;
 };
     
     

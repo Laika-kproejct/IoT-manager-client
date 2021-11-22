@@ -10,7 +10,9 @@ import LoginScreen from '../Screen/LoginScreen';
 import SignUpScreen from '../Screen/SignUpScreen';
 import MainBottomTab from './MainBottomTab';
 import ListAddScreen from '../Screen/ListAddScreen';
-
+import SensorScreen from '../Screen/SensorScreen';
+import SensoraddList from '../Screen/SesoraddList';
+import SensorToken from '../Screen/SensorToken';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const InitNavi = () => {
@@ -40,8 +42,22 @@ export const InitNavi = () => {
     name="Add"
     component={ListAddScreen}
     options={{headerShown:false}}/>
-    </Stack.Navigator>
     
+    <Stack.Screen
+    name="Sensor"
+    component={SensorScreen}
+    options={{headerShown:false}}/>
+
+    <Stack.Screen
+    name="SensorAdd"
+    component={SensoraddList}
+    options={{headerShown:false}}/>
+    
+    <Stack.Screen
+    name="SensorToken"
+    component={SensorToken}
+    options={{headerShown:false}}/>
+    </Stack.Navigator>
     );
 };
 export default InitNavi;
