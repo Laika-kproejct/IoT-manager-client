@@ -4,47 +4,41 @@ import { ImageBackground, Text, TextInput } from 'react-native';
 import Styled from 'styled-components/native';
 import StyledText from '../Components/StyledText';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Container = Styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: #FFF;
 `;
 const Header = Styled.View`
   width: 100%;
-  height: 15%;
+  height: 10%;
 `;
 const Body = Styled.View`
     flex: 1;
-    width: 80%;
+    width: 70%;
     justify-Content: center;
 `;
-const Title = Styled.Text`
-  width: 100%;
-  height: 30%;
-  fontSize: 50px;
-`;
+
 const Footer = Styled.View`
     width: 100%;
-    height: 10%;
+    height: 20%;
     justify-Content: center;
     align-items: center;
-    background-color: #5279DD;
-    color: white;
+    
 `;
-const Label = Styled.Text``;
-
-const Input = Styled.TextInput`
-    width: 100%;
-    border: 1px solid gray;
-    outline: none;
-    border-radius: 0px;
-    line-height: 2.5rem;
-    font-size: 1.2rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+const Btn = Styled.TouchableOpacity`
+  backgroundColor: #5279DD;
+  justifyContent: center;
+  alignItems: center;
+  marginBottom: 10;
+  borderRadius: 10;
+  width: 80%;
+  height: 35%;
+  padding: 10px;
 `;
-
 const SignUpScreen = ({navigation}: {navigation: any}) => {
   
   const [userName, setUserName] = useState('');
@@ -61,10 +55,15 @@ const SignUpScreen = ({navigation}: {navigation: any}) => {
 }).then((response: any) => {
     const accessToken = response.data.list.accessToken;
     const refreshToken = response.data.list.refreshToken;
-    
+
+    console.log(refreshToken);
+    console.log(accessToken);
+    AsyncStorage.setItem('accessToken', accessToken);
+    AsyncStorage.setItem('refreshToken', refreshToken);
+    navigation.navigate('Login');
+    console.log('회원가입 성공');
     //토큰을 별도 저장
     //홈화면으로 이동
-    console.log(accessToken);
 }).catch((error: any) => {
     if (error.response) {
         // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
@@ -94,14 +93,11 @@ const SignUpScreen = ({navigation}: {navigation: any}) => {
 }
   return (
     <Container>
-
       <Header>
       <ImageBackground
-
       style={{ width: "50%", height: "70%" }}  
       source={require("../images/logo.png")}  
       resizeMode="cover">
-
       </ImageBackground>
       </Header>
       <Body>
@@ -109,12 +105,14 @@ const SignUpScreen = ({navigation}: {navigation: any}) => {
           placeholder={'이름'}
           returnKeyType="next" //키보드 타입 next 설정하기
           blurOnSubmit={true}
+          onChangeText={(name) => setUserName(name)}
           style={{borderColor: 'gray', width:'100%', height:35, borderWidth: 2, borderRadius: 5, padding:5, fontSize:15, marginBottom:10}}>
         </TextInput>
         <TextInput
           placeholder={'아이디(5자 이상, 영문, 숫자)'}
           returnKeyType="next"
           blurOnSubmit={false}
+          onChangeText={(Id) => setUserId(Id)}
           style={{borderColor: 'black', width:'100%', height:35, borderWidth: 1, borderRadius: 5, padding:5,fontSize:15, marginBottom:10}}
           >
         </TextInput>
@@ -122,6 +120,8 @@ const SignUpScreen = ({navigation}: {navigation: any}) => {
           placeholder={'비밀번호(8자 이상)'}
           returnKeyType="next"
           blurOnSubmit={false}
+          onChangeText={(password) => setUserPassword(password)}
+
           style={{borderColor: 'black' , width:'100%', height:35, borderWidth: 1, borderRadius: 5, padding:5,fontSize:15, marginBottom:10}}
           >
         </TextInput>
@@ -133,9 +133,9 @@ const SignUpScreen = ({navigation}: {navigation: any}) => {
         </TextInput>
       </Body>
       <Footer>
-        <TouchableOpacity onPress={ () =>{ onClickSignUp() }}>
+        <Btn onPress={ () =>{ onClickSignUp() }}>
           <StyledText color="white">회원가입</StyledText>
-        </TouchableOpacity>
+        </Btn>        
       </Footer>
     </Container>
   );

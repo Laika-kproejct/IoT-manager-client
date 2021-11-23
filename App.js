@@ -1,10 +1,14 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import InitNavi from './src/Navigations/InitNavi';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Alert } from 'react-native';
+import messaging from '@react-native-firebase/messaging';
+
 
 const App = () => {
+  
   
   return (
     <SafeAreaView style={{flex: 1}}>
