@@ -1,11 +1,12 @@
 import 'react-native-gesture-handler';
-import React, { useState } from 'react';
-import { Text } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import React, { useEffect, useState } from 'react';
+import { Text, View } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Styled from 'styled-components/native';
 import StyledText from '../Components/StyledText';
 import { axiosApiInstance } from '../Modules/axiosApiInstance';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import styled from 'styled-components/native';
 
 const Container = Styled.View`
   flex: 1;
@@ -49,30 +50,35 @@ const Footer = Styled.View`
 const AddButton = Styled.TouchableOpacity`
 
 `;
+const SensorItem = styled.View`
+  width: 100%;
+  height: 60px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  flex-direction: row;
+  margin-bottom: 10px;
+`;
 export interface PostType2 {
 	
 	page: number; // page는 페이지 번호
 	size: number;
   sensorid: number;
   token?: string;
-  list?:number;
-  content?:string|number;
+  type?:number;
+  timestamp?:string|number;
   homeId?:number;
 }
 export const SensorScreen = (props: any) => {
   const {navigation, route} = props;
   const [sensor, setSensor] = useState<PostType2[]>([]);
+  const [sensorList, setSensorList] = useState([]);
   //const SearchAPI = () => {
   const {homeId} = route.params;
-        axiosApiInstance.get("http://3.36.174.74:8080/manager/list/home/"+homeId+"/sensor",{  
+  useEffect(() => {
+    axiosApiInstance.get("http://3.36.174.74:8080/manager/list/home/"+homeId+"/sensor",{  
           
         }).then((response: any) => {
-        console.log(response.data.list.content.sensorid);
-        console.log(route);
-        console.log(route.params);
-        //console.log(response.data.list.content);
-        //setSensor(response.data.list.sensorid);
-        //const slist = response.data.list.content;
+        console.log(response.data.list.content);
         setSensor(response.data.list.content);  
         }).catch((error: any) => {
         if (error.response) {
@@ -96,19 +102,40 @@ export const SensorScreen = (props: any) => {
             }
         }
         });
-
+  }, []);
+  useEffect(() => {
+    const list: any = sensor.map(row => (
+      <SensorItem key={row.sensorid}>
+        <View style={{flex: 0.9}}>
+          <TouchableOpacity style={{width: "100%", height: "100%", justifyContent: "center"}} onPress={()=>{
+                navigation.navigate('Sensor',{homeId:row.homeId});
+          }}>
+            <View style={{flexDirection: "row"}}>
+              <StyledText fontWeight="700">ID </StyledText><StyledText>{row.sensorid}</StyledText>
+            </View>
+            <View style={{flexDirection: "row"}}>
+              <StyledText fontWeight="700">시간 </StyledText><StyledText>{row.timestamp}</StyledText>
+            </View>
+            <View style={{flexDirection: "row"}}>
+              <StyledText fontWeight="700">타입 </StyledText><StyledText>{row.type}</StyledText>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={{flex: 0.1}}>
+          <TouchableOpacity style={{width: "100%", height: "100%", justifyContent: 'center'}}>
+            <Icon color='#777' size={30} name='delete-outline'/>
+          </TouchableOpacity>
+        </View>
+      </SensorItem>
+    ));
+      setSensorList(list);
+  }, [sensor]);
   return (
     <Container>
       <Header>센서 목록</Header>
         <Content>
         <ScrollView>
-            {sensor.map(row => (
-            <List>
-              <StyledText size="15px">
-              {row.sensorid}
-              </StyledText>
-            </List>
-              ))}
+            {sensorList.length == 0 ? <StyledText>센서 리스트가 비었습니다.</StyledText> : sensorList}
         </ScrollView>
         </Content>
         <Footer>

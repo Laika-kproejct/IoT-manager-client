@@ -1,63 +1,61 @@
 import 'react-native-gesture-handler';
-import React, { useState } from 'react';
-import Styled from 'styled-components/native';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { axiosApiInstance } from '../Modules/axiosApiInstance';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import StyledText from '../Components/StyledText';
 import PropTypes from 'prop-types';
+import styled from 'styled-components/native';
 
-const Container = Styled.View`
+const Container = styled.View`
   flex: 1;
-  flexDirection: column;
-  padding-top: 50;
+  flex-direction: column;
   background-color: #EEE;
 
 `;
-const Header = Styled.Text`
-  font-weight: 800;
-  font-size: 30;
-  margin-left: 20;
-  margin-bottom: 20;
-`;
 
-const Content = Styled.View`
+const BodyWrapper = styled.View`
   flex: 1;
-  margin-vertical: 5;
-  margin-horizontal: 20;
   padding: 10px;
   background-color: #FFF;
   border-radius: 10;
+  margin: 0 10px 0 10px;
 `;
 
-const List = Styled.View`
-  flexDirection: row;
-  alignItems: center;
-  justifyContent: space-between;
-  height: 50;
+
+const StyledScoll = styled.ScrollView`
+  flex-direction: column;
 `;
 
-const Footer = Styled.View`
+const Footer = styled.View`
+  flex: 0.1;
   width: 100%;
   height: 10%;
   background-color: white;
   justify-content: center;
   align-items: center;
-  backgroundColor: #EEE;
+  background-color: #EEE;
 `;
 
-const AddButton = Styled.TouchableOpacity`
+const AddButton = styled.TouchableOpacity`
 
 `;
 
-export interface PostType {
-	content?: string;
+const HomeItem = styled.View`
+  width: 100%;
+  height: 60px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  flex-direction: row;
+  margin-bottom: 10px;
+`;
+
+export interface HomeResponseType {
 	homeId?: number;
 	address?: string;
-	personList: string;
-  page:number;
-  size:number;
+	personList?: [];
+  notEmpty?: boolean;
 }
 export interface props{
   params?:number|string;
@@ -65,22 +63,53 @@ export interface props{
 
 export const HomeScreen = (props:any) => {
   const {navigation} = props;
-  const [home, setHome] = useState<PostType[]>([]);
+  const [home, setHome] = useState<HomeResponseType[]>([]);
+  const [homeList, setHomeList] = useState([]);
   //const [idhome, setIdhome] = useState('');
       
-      axiosApiInstance.get("http://3.36.174.74:8080/manager/list/home",{
+      useEffect(()=>{
+        onPressRefreshHome();
+      }, []);
+      
+      useEffect(()=>{
+        const list: any = home.map(row => (
+          <HomeItem key={row.homeId}>
+            <View style={{flex: 0.9}}>
+              <TouchableOpacity style={{width: "100%", height: "100%", justifyContent: "center"}} onPress={()=>{
+                    navigation.navigate('Sensor',{homeId:row.homeId});
+              }}>
+                <View style={{flexDirection: "row"}}>
+                  <StyledText fontWeight="700">ID </StyledText><StyledText>{row.homeId}</StyledText>
+                </View>
+                <View style={{flexDirection: "row"}}>
+                  <StyledText fontWeight="700">주소 </StyledText><StyledText>{row.address}</StyledText>
+                </View>
+                <View style={{flexDirection: "row"}}>
+                  <StyledText fontWeight="700">감지 시스템 작동 여부 </StyledText><StyledText>{row.notEmpty == true ? "ON" : "OFF"}</StyledText>
+                </View>
+              </TouchableOpacity>
+            </View>
+            <View style={{flex: 0.1}}>
+              <TouchableOpacity style={{width: "100%", height: "100%", justifyContent: 'center'}}>
+                <Icon color='#777' size={30} name='delete-outline'/>
+              </TouchableOpacity>
+            </View>
+          </HomeItem>
+        ));
+        setHomeList(list);
+      }, [home]);
+
+      const onPressRefreshHome = () => {
+        console.log("새로고침");
+        axiosApiInstance.get("http://3.36.174.74:8080/manager/list/home",{
         params:{
           
-          page: 1, // page는 페이지 번호
+          page: 0, // page는 페이지 번호
           size: 5 //size는 한 페이지에 나오는 아이템 개수
         }
       }).then((response: any) => {
-      //console.log(response.status);
-      //console.log(response.config);
-      //console.log(response.data.list.content);
       setHome(response.data.list.content);
-      //console.log(response.data.list.content);
-      
+      console.log(response.data.list.content);
       }).catch((error: any) => {
       if (error.response) {
       console.log(error.response.data);
@@ -103,33 +132,18 @@ export const HomeScreen = (props:any) => {
         }
       }
       });
+      }
       
   return (
     <Container>
-        <Header>관리대상자 목록</Header>
-        <Content>
-        <ScrollView>
-        {home.map(row => (
-          <List>
-            <StyledText size="20px">
-            {row.address},{row.homeId}
-            </StyledText>
-              <AddButton>
-                <Icon color='#777' size={30} name='delete-outline'
-                onPress={()=>{
-                  navigation.navigate('Sensor',{
-
-                  homeId:row.homeId
-
-                })
-                }}
-              />
-              </AddButton>
-          </List>
-        ))
-        }
-        </ScrollView>
-        </Content>
+        <View style={{flex: 0.15, flexDirection: "row", alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: "5%"}}>
+          <StyledText size="20px" fontWeight="700">관리대상자 목록</StyledText><TouchableOpacity onPress={()=>{onPressRefreshHome()}}><StyledText>새로고침</StyledText></TouchableOpacity>
+        </View>
+        <BodyWrapper>
+          <StyledScoll>
+          {homeList}
+          </StyledScoll>
+        </BodyWrapper>
         <Footer>
           <AddButton>
             <Icon style={styles.addBtn} size={50}  name='plus-circle'
@@ -137,26 +151,6 @@ export const HomeScreen = (props:any) => {
           </AddButton>
         </Footer>
         </Container>
-    /*
-    <Container>
-      <Header>
-        <Label>관리대상자</Label>
-      </Header>
-      <Body>   
-      <AddButton onPress={() => {
-            SearchAPI();
-          }}>
-            <StyledText>추가</StyledText>
-      </AddButton>      
-      </Body>
-      <Footer>
-      <AddButton onPress={() => {
-            onPressAddButton();
-          }}>
-            <StyledText>추가</StyledText>
-          </AddButton>
-      </Footer>    
-    </Container>*/
     );
 }
   const styles = StyleSheet.create({

@@ -49,9 +49,8 @@ const SignUpScreen = ({navigation}: {navigation: any}) => {
 
   const onClickSignUp = () => {
   axios.post("http://3.36.174.74:8080/manager/register",{
-    Id: userId,
-    password: userPassword,
-    name: userName
+    email: userId,
+    password: userPassword
 }).then((response: any) => {
     const accessToken = response.data.list.accessToken;
     const refreshToken = response.data.list.refreshToken;
