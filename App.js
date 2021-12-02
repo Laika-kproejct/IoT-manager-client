@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import InitNavi from './src/Navigations/InitNavi';
 import { SafeAreaView } from 'react-native-safe-area-context';

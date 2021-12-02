@@ -6,7 +6,6 @@ import { ImageBackground,
 import Styled from 'styled-components/native';
 import StyledText from '../Components/StyledText';
 import messaging from '@react-native-firebase/messaging';
-import { firebase } from '@react-native-firebase/messaging';
 
 
 const Container = Styled.View`    
@@ -37,19 +36,26 @@ const Touch =Styled.TouchableOpacity`
 const Label = Styled.Text``;
 
 const MainScreen = ({navigation}:{navigation:any}) => {
-    /*
+    messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+        console.log('Message handled in the background!', remoteMessage);
+        //  여기에 로직을 작성한다.
+        //  remoteMessage.data로 메세지에 접근가능
+        //  remoteMessage.from 으로 topic name 또는 message identifier
+        //  remoteMessage.messageId 는 메시지 고유값 id
+        //  remoteMessage.notification 메시지와 함께 보내진 추가 데이터
+        //  remoteMessage.sentTime 보낸시간
+        });
+        // Foreground 상태인 경우
+        React.useEffect(() => {
+        const unsubscribe = messaging().onMessage(async remoteMessage => {
+            Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+        });
+        return unsubscribe;
+        });
 
-    firebase.initializeApp({
-        appId: 'ab',
-        apiKey: 'ac',
-        projectId: 'as',
-        databaseURL: 'ad',
-        storageBucket: 'ac',
-        messagingSenderId: 'a',
-        clientId: 'a',
-    });
     
     
+    /*
     async function requestUserPermission() {
         const authStatus = await messaging().requestPermission();
         const enabled =

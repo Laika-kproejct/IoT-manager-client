@@ -8,7 +8,7 @@ import { axiosApiInstance } from '../Modules/axiosApiInstance';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styled from 'styled-components/native';
 
-const Container = Styled.View`
+const Container = styled.View`
   flex: 1;
   flexDirection: column;
   padding-top: 50;
@@ -22,7 +22,7 @@ const Header = Styled.Text`
   margin-bottom: 20;
 `;
 
-const Content = Styled.View`
+const Content = styled.View`
   flex: 1;
   margin-vertical: 5;
   margin-horizontal: 20;
@@ -31,7 +31,7 @@ const Content = Styled.View`
   border-radius: 10;
 `;
 
-const List = Styled.View`
+const List = styled.View`
   flexDirection: row;
   alignItems: center;
   justifyContent: space-between;
@@ -39,7 +39,7 @@ const List = Styled.View`
   border-bottomColor: #bbb;
 `;
 
-const Footer = Styled.View`
+const Footer = styled.View`
   width: 100%;
   height: 10%;
   background-color: white;
@@ -47,7 +47,7 @@ const Footer = Styled.View`
   align-items: center;
   background-color: #EEE;
 `;
-const AddButton = Styled.TouchableOpacity`
+const AddButton = styled.TouchableOpacity`
 
 `;
 const SensorItem = styled.View`

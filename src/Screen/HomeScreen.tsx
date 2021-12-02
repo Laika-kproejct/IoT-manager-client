@@ -7,6 +7,7 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import StyledText from '../Components/StyledText';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
+import messaging from '@react-native-firebase/messaging';
 
 const Container = styled.View`
   flex: 1;
@@ -62,6 +63,7 @@ export interface props{
 }
 
 export const HomeScreen = (props:any) => {
+  
   const {navigation} = props;
   const [home, setHome] = useState<HomeResponseType[]>([]);
   const [homeList, setHomeList] = useState([]);
@@ -69,14 +71,20 @@ export const HomeScreen = (props:any) => {
       
       useEffect(()=>{
         onPressRefreshHome();
+        messaging().getToken().then((result: any)=> {
+          console.log(result);
+        }).catch((error:any)=> {
+          console.error(error);
+        });
       }, []);
-      
+    
       useEffect(()=>{
         const list: any = home.map(row => (
           <HomeItem key={row.homeId}>
             <View style={{flex: 0.9}}>
-              <TouchableOpacity style={{width: "100%", height: "100%", justifyContent: "center"}} onPress={()=>{
-                    navigation.navigate('Sensor',{homeId:row.homeId});
+              <TouchableOpacity style={{width: "100%", height: "100%", justifyContent: "center"}} 
+              onPress={()=>{navigation.navigate('Sensor',
+              {homeId:row.homeId})
               }}>
                 <View style={{flexDirection: "row"}}>
                   <StyledText fontWeight="700">ID </StyledText><StyledText>{row.homeId}</StyledText>

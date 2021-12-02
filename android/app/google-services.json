@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "753101359159",
-    "project_id": "laika-kproject",
-    "storage_bucket": "laika-kproject.appspot.com"
+    "project_number": "581899611081",
+    "project_id": "laika-iot-client",
+    "storage_bucket": "laika-iot-client.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:753101359159:android:89cf0b1c083e26fd2a57b2",
+        "mobilesdk_app_id": "1:581899611081:android:8dcca8e4953c13f283d618",
         "android_client_info": {
           "package_name": "com.laika_reactnative"
         }
       },
       "oauth_client": [
         {
-          "client_id": "753101359159-4a7albfh4ru7mak17eq55e0hkpbdkagl.apps.googleusercontent.com",
+          "client_id": "581899611081-j2m0svs6safedb5akjdstcta7n97g9ql.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC6ZVTFz6UWKVpzefATgP46yhCsczmE2Eg"
+          "current_key": "AIzaSyB_HPsbs0OnA1KkVGN-802So4o_7ewgLiQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "753101359159-4a7albfh4ru7mak17eq55e0hkpbdkagl.apps.googleusercontent.com",
+              "client_id": "581899611081-j2m0svs6safedb5akjdstcta7n97g9ql.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "753101359159-c9g3k3nvqkiq0irbv2m3d6k30cf1fs14.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "org.reactjs.native.example.Laika-ReactNative"
-              }
             }
           ]
         }
