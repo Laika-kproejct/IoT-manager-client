@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, AsyncStorage } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { axiosApiInstance } from '../Modules/axiosApiInstance';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
@@ -67,17 +67,41 @@ export const HomeScreen = (props:any) => {
   const {navigation} = props;
   const [home, setHome] = useState<HomeResponseType[]>([]);
   const [homeList, setHomeList] = useState([]);
-  //const [idhome, setIdhome] = useState('');
+  
       
       useEffect(()=>{
         onPressRefreshHome();
-        messaging().getToken().then((result: any)=> {
-          console.log(result);
-        }).catch((error:any)=> {
-          console.error(error);
-        });
+        messaging().getToken().then((response: any) => {
+
+          console.log(response);
+          axiosApiInstance.post("http://3.36.174.74:8080/manager/fcm/refresh",{
+          token: response
+          })
+          console.log('갱신 완료');
+        }).catch((error: any) => {
+          if (error.response) {
+          console.log(error.response.data);
+          
+          if(error.response.status === 400) {
+          console.log('요청이 잘못됐습니다');
+          }                  
+          if(error.response.status === 404) {
+              console.log("실패");
+          }
+          else if (error.request) {
+          // 요청이 이루어 졌으나 응답을 받지 못했습니다.
+          // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+          // Node.js의 http.ClientRequest 인스턴스입니다.
+          console.log(error.request);
+          }
+          else {
+            // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
+          console.log('Error', error.message);
+            }
+          }
+          });
       }, []);
-    
+
       useEffect(()=>{
         const list: any = home.map(row => (
           <HomeItem key={row.homeId}>
