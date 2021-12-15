@@ -10,31 +10,27 @@ const Container = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
-    margin-vertical: 5;
-    margin-horizontal: 20;
     padding: 10px;
     background-color: #FFF;
     border-radius: 10;
     
 `;
 const Header = styled.Text`
-    fontWeight: 800;
-    fontSize: 30;
-    marginLeft: 20;
+    font-weight: 800;
+    font-size: 30;
+    margin-left: 20;
     margin-bottom: 20;
-    justifyContent: center;
-    alignItems: center;
-    
+    align-items: center;
 `;
 const Body = styled.View`
     width: 100%;
     height: 60%;
-    justifyContent: center;
-    alignItems: center;
+    justify-content: center;
+    align-items: center;
 `;
 const Footer = styled.View`
     width: 100%;
-    height: 20%;
+    height: 15%;
     justify-content: center;
     align-items: center;
 `;
@@ -48,7 +44,7 @@ const Input = styled.TextInput`
     
 `;
 const Btn = styled.TouchableOpacity`
-    width: 80%;
+    width: 90%;
     height: 40%;
     background-color: #5279DD;
     justify-content: center;
@@ -82,11 +78,9 @@ const ListAddScreen = ({navigation}:{navigation:any}) =>{
             address: useraddress,
             personList: username
         }).then((response: any) => {
-        
             console.log(response.data);
             console.log("등록 성공");
-            navigation.navigate('Bottom');
-        
+            navigation.goBack();
         }).catch((error: any) => {
             if (error.response) {
                 console.log(error.response.data);
@@ -109,13 +103,13 @@ const ListAddScreen = ({navigation}:{navigation:any}) =>{
                 // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
                 console.log('Error', error.message);
             }
-		}
+        }
         
     });
 }
     return(
         <Container>
-            <Header>등록하기</Header>
+            <Header>관리대상자 등록하기</Header>
             <Body>
                 <Input placeholder={'주소 입력'}
                 onChangeText={(address) => setUserAddress(address)}/>
@@ -126,6 +120,9 @@ const ListAddScreen = ({navigation}:{navigation:any}) =>{
             <Footer>
                 <Btn onPress={()=>{onClickregister()}}>
                     <StyledText color="white">확인</StyledText>
+                </Btn>
+                <Btn onPress={()=>{navigation.goBack();}}>
+                    <StyledText color="white">취소</StyledText>
                 </Btn>
             </Footer>
         </Container>
