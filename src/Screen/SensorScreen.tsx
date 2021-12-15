@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import { Text, View, TouchableOpacity,ScrollView } from 'react-native';
+import { View, TouchableOpacity,ScrollView } from 'react-native';
 import StyledText from '../Components/StyledText';
 import { axiosApiInstance } from '../Modules/axiosApiInstance';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -39,6 +39,7 @@ const SensorItem = styled.View`
   box-shadow: 3px 3px 3px gray;
   background-color: white;
   padding: 0 10px 0 10px;
+  elevation: 3;
 `;
 export interface PostType2 {
   

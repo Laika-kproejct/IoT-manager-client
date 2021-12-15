@@ -1,9 +1,8 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, AsyncStorage } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { axiosApiInstance } from '../Modules/axiosApiInstance';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import StyledText from '../Components/StyledText';
 import styled from 'styled-components/native';
 import messaging from '@react-native-firebase/messaging';
@@ -36,6 +35,7 @@ const HomeItem = styled.View`
   margin-bottom: 10px;
   box-shadow: 3px 3px 3px gray;
   padding: 0 10px 0 10px;
+  elevation: 3;
 `;
 
 export interface HomeResponseType {
@@ -80,9 +80,10 @@ export const HomeScreen = (props:any) => {
         const list: any = home.map(row => (
           <HomeItem key={row.homeId} style={{backgroundColor: row.notEmpty == true ? 'white' : '#ececec'}}>
             <View style={{flex: 1}}>
-              <TouchableOpacity style={{width: "100%", height: "100%", justifyContent: "center"}} 
-              onPress={()=>{navigation.navigate('Sensor',
-              {homeId:row.homeId})
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('Sensor',
+                    { homeId: row.homeId });
               }}>
                 <View style={{flexDirection: "row"}}>
                   <StyledText fontWeight="700">고유번호 </StyledText><StyledText>{row.homeId}</StyledText>
@@ -95,7 +96,7 @@ export const HomeScreen = (props:any) => {
                 </View>
               </TouchableOpacity>
             </View>
-              <TouchableOpacity style={{width: "100%", height: "100%", justifyContent: 'center'}}>
+              <TouchableOpacity style={{justifyContent: 'center'}}>
                 <Icon color='#777' size={30} name='delete-outline'/>
               </TouchableOpacity>
           </HomeItem>
@@ -107,13 +108,12 @@ export const HomeScreen = (props:any) => {
         console.log("새로고침");
         axiosApiInstance.get("http://3.36.174.74:8080/manager/list/home",{
         params:{
-          
           page: 0, // page는 페이지 번호
           size: 100 //size는 한 페이지에 나오는 아이템 개수, 원래는 인피니티스크롤 적용해야함
         }
       }).then((response: any) => {
-      setHome(response.data.list.content);
-      console.log(response.data.list.content);
+        setHome(response.data.list.content);
+        console.log(response.data.list.content);
       }).catch((error: any) => {
       if (error.response) {
       console.log(error.response.data);
