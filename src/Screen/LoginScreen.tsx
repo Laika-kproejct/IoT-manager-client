@@ -41,7 +41,7 @@ const Content = styled.View`
 
 const Footer = styled.View`
     width: 100%;
-    height: 20%;
+    height: 15%;
     justify-content: center;
 `;
 
@@ -89,7 +89,7 @@ const LoginScreen = ({navigation}:{navigation:any}) => {
                 // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
                 console.log('Error', error.message);
             }
-		}
+        }
         
     });
 }
@@ -97,7 +97,7 @@ const LoginScreen = ({navigation}:{navigation:any}) => {
         <Container>
             <Header>
             <ImageBackground 
-            	style={{ width: "50%", height: "70%" }}  //View를 꽉채우도록
+                style={{ width: "50%", height: "70%" }}  //View를 꽉채우도록
                 source={require("../images/logo.png")}  //이미지경로
                 resizeMode="cover" // 'cover', 'contain', 'stretch', 'repeat', 'center' 중 선택 
                 >
@@ -105,7 +105,7 @@ const LoginScreen = ({navigation}:{navigation:any}) => {
                 
             </Header>
             <Title>
-                <StyledText fontWeight="700" size="50px" center>로그인</StyledText>
+                <StyledText fontWeight="700" size="30px" center>관리자 로그인</StyledText>
                 </Title>    
                     <Content>
                     <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center', paddingBottom:20}}>
@@ -113,7 +113,7 @@ const LoginScreen = ({navigation}:{navigation:any}) => {
                         <TextInput 
                         onChangeText={(Id) => setUserId(Id)}
                         placeholder={'아이디'}
-                        style={{borderColor: 'black', width:'80%', height:45, borderWidth: 1, borderRadius: 15}}/>
+                        style={{borderColor: 'black', width:'80%', height:45, borderWidth: 1, borderRadius: 15, paddingLeft: 10}}/>
                         </View>
                     <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',paddingBottom:10}}>
                     <Text><Icon ion-icon name="lock-closed-outline" size={30} color="black"/></Text>
@@ -122,7 +122,7 @@ const LoginScreen = ({navigation}:{navigation:any}) => {
                         textContentType="password"
                         secureTextEntry={true}
                         placeholder={'패스워드'}
-                        style={{borderColor: 'black', width:'80%', height:45, borderWidth: 1, borderRadius: 15}}/>
+                        style={{borderColor: 'black', width:'80%', height:45, borderWidth: 1, borderRadius: 15, paddingLeft: 10}}/>
                         </View>
                     </Content>
                     <Footer>
